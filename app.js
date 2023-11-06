@@ -28,8 +28,8 @@ const initializeServerAndDb = async () => {
 
 initializeServerAndDb();
 
-app.get("/login", (request, response) => {
-  const { password } = request.params;
-  const hashedPassword = bcrypt.hash(password);
+app.post("/login/", async (request, response) => {
+  const { password } = request.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
   response.send(hashedPassword);
 });
